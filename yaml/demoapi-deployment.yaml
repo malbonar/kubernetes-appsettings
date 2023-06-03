@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demoapi-deployment
+spec:
+  selector:
+    matchLabels:
+      app: demoapi
+  template:
+    metadata:
+      labels:
+        app: demoapi
+    spec:
+      containers:
+      - name: demoapi
+        image: malbonar/demos:demoapi
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: appsettings-volume
+            mountPath: /app/appsettings.json
+            subPath: appsettings.json
+      volumes:
+      - name: appsettings-volume
+        configMap:
+            name: demoapi-config

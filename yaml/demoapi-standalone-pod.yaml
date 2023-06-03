@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demoapi-pod
+spec:
+  containers:
+  - name: demoapi
+    image: malbonar/demos:demoapi
+    ports:
+    - containerPort: 8080
